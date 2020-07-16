@@ -19,14 +19,14 @@ while True:
     api = eval(r.text)
 
     local_time = datetime.strptime(api['data']['updated_at'], '%Y-%m-%dT%H:%M:%S.000Z') - timedelta(hours=3)
-    local_time = local_time.strftime('%d/%m/%Y %H:%M:%S')
+    local_time = local_time.strftime('%d-%m-%Y %H:%M:%S')
     if confirmed != last_confirmed:
         confirmed = str("{:,}".format(int(api['data']['confirmed']))).replace(',', '.')
         active = str("{:,}".format(int(api['data']['cases']))).replace(',', '.')
         recovered = str("{:,}".format(int(api['data']['recovered']))).replace(',', '.')
         deaths = str("{:,}".format(int(api['data']['deaths']))).replace(',', '.')
 
-        msg = f'''*Casos coronavírus no Brasil 🇧🇷*
+        msg = f'''*Casos de coronavírus no Brasil 🇧🇷*
             
 ✅ *{confirmed}* Confirmados
 🚨 *{active}* Ativos
