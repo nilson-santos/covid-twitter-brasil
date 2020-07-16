@@ -11,7 +11,8 @@ auth = tweepy.OAuthHandler(secrets['consumer_key'], secrets['consumer_secret'])
 auth.set_access_token(secrets['access_token'], secrets['access_token_secret'])
 twitter = tweepy.API(auth)
 
-last_update = ''
+confirmed = '!='
+last_confirmed = ''
 
 while True:
     r = requests.get('https://covid19-brazil-api.now.sh/api/report/v1/brazil/')
@@ -19,7 +20,7 @@ while True:
 
     local_time = datetime.strptime(api['data']['updated_at'], '%Y-%m-%dT%H:%M:%S.000Z') - timedelta(hours=3)
     local_time = local_time.strftime('%d/%m/%Y %H:%M:%S')
-    if local_time != last_update:
+    if confirmed != last_confirmed:
         confirmed = str("{:,}".format(int(api['data']['confirmed']))).replace(',', '.')
         active = str("{:,}".format(int(api['data']['cases']))).replace(',', '.')
         recovered = str("{:,}".format(int(api['data']['recovered']))).replace(',', '.')
@@ -37,6 +38,6 @@ while True:
 
         caption = '\n#Python #RaspberryPi #covid19 #coronavirus #Recife'
         twitter.update_status(msg + caption)
-        last_update = local_time
+        last_confirmed = confirmed
 
     sleep(300)
