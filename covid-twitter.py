@@ -28,13 +28,13 @@ while True:
 
         msg = f'''*Casos de coronavírus no Brasil 🇧🇷*
             
-✅ *{confirmed}* Confirmados
-🚨 *{active}* Ativos
-♻ *{recovered}* Recuperados
-💀 *{deaths}* Mortes
+✅ {confirmed} Confirmados
+🚨 {active} Ativos
+♻ {recovered} Recuperados
+💀 {deaths} Mortes
             
-🕐 *Atualizado * {local_time}
-📊 *Fonte: *WHO, CDC, ECDC, NHC e DXY'''
+🕐 Atualizado: {local_time}
+📊 Fonte: WHO, CDC, ECDC, NHC e DXY'''
 
         caption = '\n#Python #RaspberryPi #covid19 #coronavirus #Recife'
         twitter.update_status(msg + caption)
